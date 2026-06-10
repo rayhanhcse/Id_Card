@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Demo Card Generator</title>
+
+<link rel="stylesheet" href="style.css">
+
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+
+<div class="form">
+
+<h2>Create Demo Card</h2>
+
+<input type="text" id="name" placeholder="Full Name">
+<input type="text" id="id" placeholder="ID Number">
+<input type="text" id="dept" placeholder="Department">
+<input type="text" id="session" placeholder="Session">
+<input type="text" id="blood" placeholder="Blood Group">
+<input type="date" id="dob">
+
+<input type="file" id="photo">
+
+<button onclick="generateCard()">Generate</button>
+<button onclick="downloadCard()">Download PNG</button>
+
+</div>
+
+<div id="card" class="card">
+
+<div class="watermark">
+DEMO ONLY
+</div>
+
+<div class="header">
+<h2>STUDENT DEMO CARD</h2>
+<p>NOT VALID FOR IDENTIFICATION</p>
+</div>
+
+<div class="body">
+
+<img id="previewPhoto" class="photo">
+
+<div class="info">
+<p><b>Name:</b> <span id="cName"></span></p>
+<p><b>ID:</b> <span id="cId"></span></p>
+<p><b>Department:</b> <span id="cDept"></span></p>
+<p><b>Session:</b> <span id="cSession"></span></p>
+<p><b>Blood:</b> <span id="cBlood"></span></p>
+<p><b>DOB:</b> <span id="cDob"></span></p>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
