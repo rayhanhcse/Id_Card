@@ -1,67 +1,272 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Demo Card Generator</title>
-
-<link rel="stylesheet" href="style.css">
-
-<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>DU CSE Student ID Card Generator</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet"/>
+  <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
 </head>
 <body>
 
-<div class="container">
+  <!-- Header -->
+  <header class="header">
+    <div class="header-left">
+      <img src="du-logo.png" alt="DU Logo" class="header-logo" id="headerLogo" onerror="this.style.display='none'"/>
+      <div class="header-emblem" id="headerEmblem">
+        <svg viewBox="0 0 60 60" width="48" height="48">
+          <circle cx="30" cy="30" r="28" fill="#1a3a6b" stroke="#f0a500" stroke-width="2"/>
+          <circle cx="30" cy="30" r="22" fill="none" stroke="#f0a500" stroke-width="1"/>
+          <text x="30" y="26" text-anchor="middle" fill="#f0a500" font-size="7" font-weight="bold">ঢাকা</text>
+          <text x="30" y="35" text-anchor="middle" fill="#f0a500" font-size="7" font-weight="bold">বিশ্ববিদ্যালয়</text>
+          <text x="30" y="44" text-anchor="middle" fill="#fff" font-size="5">DU</text>
+        </svg>
+      </div>
+      <div class="header-title">
+        <h1>DU CSE Student ID Card Generator</h1>
+        <p>Generate your student ID card</p>
+      </div>
+    </div>
+    <button class="btn-download" id="btnDownload">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      Download ID Card
+    </button>
+  </header>
 
-<div class="form">
+  <!-- Main Content -->
+  <main class="main-container">
 
-<h2>Create Demo Card</h2>
+    <!-- Left: Form -->
+    <section class="form-section">
+      <div class="section-header">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1a3a6b" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        <h2>Student Information</h2>
+      </div>
 
-<input type="text" id="name" placeholder="Full Name">
-<input type="text" id="id" placeholder="ID Number">
-<input type="text" id="dept" placeholder="Department">
-<input type="text" id="session" placeholder="Session">
-<input type="text" id="blood" placeholder="Blood Group">
-<input type="date" id="dob">
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="fullName">Full Name</label>
+          <input type="text" id="fullName" placeholder="Rayhan Hussain" value="Rayhan Hussain"/>
+        </div>
+        <div class="form-group">
+          <label for="studentId">Student ID</label>
+          <input type="text" id="studentId" placeholder="CSE-25-0187" value="CSE-25-0187"/>
+        </div>
+        <div class="form-group">
+          <label for="session">Session</label>
+          <input type="text" id="session" placeholder="2020-21" value="2020-21"/>
+        </div>
+        <div class="form-group">
+          <label for="department">Department</label>
+          <select id="department">
+            <option value="Computer Science &amp; Engineering (CSE)" selected>Computer Science &amp; Engineering (CSE)</option>
+            <option value="Electrical &amp; Electronic Engineering (EEE)">Electrical &amp; Electronic Engineering (EEE)</option>
+            <option value="Mathematics">Mathematics</option>
+            <option value="Physics">Physics</option>
+            <option value="Chemistry">Chemistry</option>
+            <option value="Statistics">Statistics</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="faculty">Faculty</label>
+          <select id="faculty">
+            <option value="Faculty of Science" selected>Faculty of Science</option>
+            <option value="Faculty of Engineering">Faculty of Engineering</option>
+            <option value="Faculty of Arts">Faculty of Arts</option>
+            <option value="Faculty of Business Studies">Faculty of Business Studies</option>
+            <option value="Faculty of Social Science">Faculty of Social Science</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="bloodGroup">Blood Group</label>
+          <select id="bloodGroup">
+            <option value="A+">A+</option>
+            <option value="A-">A-</option>
+            <option value="B+" selected>B+</option>
+            <option value="B-">B-</option>
+            <option value="O+">O+</option>
+            <option value="O-">O-</option>
+            <option value="AB+">AB+</option>
+            <option value="AB-">AB-</option>
+          </select>
+        </div>
+        <div class="form-group full-width">
+          <label for="dob">Date of Birth</label>
+          <div class="input-icon">
+            <input type="text" id="dob" placeholder="30/09/2002" value="30/09/2002"/>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#888" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          </div>
+        </div>
+        <div class="form-group full-width">
+          <label for="validUntil">Valid Until</label>
+          <div class="input-icon">
+            <input type="text" id="validUntil" placeholder="June 2030" value="June 2030"/>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#888" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          </div>
+        </div>
+        <div class="form-group full-width">
+          <label>Photo Upload</label>
+          <div class="photo-upload-area" id="photoUploadArea">
+            <div class="photo-preview-container">
+              <img id="photoPreview" src="" alt="Preview" style="display:none;"/>
+              <div id="photoPlaceholder" class="photo-placeholder">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#888" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+              </div>
+            </div>
+            <div class="photo-upload-text">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1a3a6b" stroke-width="1.5"><polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"/></svg>
+              <span>Click to change photo</span>
+              <small>JPG, PNG (Max. 2MB)</small>
+            </div>
+            <input type="file" id="photoInput" accept="image/*" style="display:none;"/>
+          </div>
+        </div>
+      </div>
 
-<input type="file" id="photo">
+      <div class="form-actions">
+        <button class="btn-reset" id="btnReset">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.21"/></svg>
+          Reset
+        </button>
+        <button class="btn-generate" id="btnGenerate">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          Generate ID Card
+        </button>
+      </div>
+    </section>
 
-<button onclick="generateCard()">Generate</button>
-<button onclick="downloadCard()">Download PNG</button>
+    <!-- Right: Preview -->
+    <section class="preview-section">
+      <div class="section-header">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1a3a6b" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+        <h2>ID Card Preview</h2>
+      </div>
 
-</div>
+      <div class="id-card-wrapper">
+        <div class="id-card" id="idCard">
 
-<div id="card" class="card">
+          <!-- Card Header -->
+          <div class="card-header">
+            <div class="card-header-left">
+              <div class="card-logo-box">
+                <svg viewBox="0 0 60 70" width="58" height="68">
+                  <rect x="2" y="2" width="56" height="66" fill="#1a3a6b" stroke="#f0a500" stroke-width="2" rx="2"/>
+                  <circle cx="30" cy="22" r="12" fill="none" stroke="#f0a500" stroke-width="1.5"/>
+                  <path d="M24 28 Q30 18 36 28" fill="#e74c3c" stroke="none"/>
+                  <line x1="30" y1="14" x2="30" y2="30" stroke="#f0a500" stroke-width="1"/>
+                  <line x1="22" y1="22" x2="38" y2="22" stroke="#f0a500" stroke-width="1"/>
+                  <circle cx="30" cy="22" r="3" fill="#f0a500"/>
+                  <text x="30" y="50" text-anchor="middle" fill="#f0a500" font-size="5.5" font-weight="bold">ঢাকা</text>
+                  <text x="30" y="58" text-anchor="middle" fill="#f0a500" font-size="5.5" font-weight="bold">বিশ্ববিদ্যালয়</text>
+                  <rect x="4" y="60" width="52" height="8" fill="#e74c3c"/>
+                  <text x="30" y="66" text-anchor="middle" fill="#fff" font-size="5">DU</text>
+                </svg>
+              </div>
+              <div class="card-header-text">
+                <h3 class="card-uni-en">UNIVERSITY OF DHAKA</h3>
+                <p class="card-uni-bn">ঢাকা বিশ্ববিদ্যালয়</p>
+                <p class="card-estd">ESTD. 1921</p>
+              </div>
+            </div>
+            <div class="card-header-right">
+              <svg viewBox="0 0 120 100" width="120" height="80" opacity="0.15">
+                <rect x="10" y="5" width="100" height="90" fill="none" stroke="#fff" stroke-width="1.5"/>
+                <circle cx="60" cy="35" r="20" fill="none" stroke="#fff" stroke-width="1.5"/>
+                <rect x="30" y="60" width="60" height="5" fill="#fff"/>
+                <rect x="25" y="70" width="70" height="3" fill="#fff"/>
+                <rect x="20" y="78" width="80" height="3" fill="#fff"/>
+                <rect x="40" y="5" width="40" height="15" fill="none" stroke="#fff" stroke-width="1"/>
+              </svg>
+            </div>
+          </div>
 
-<div class="watermark">
-DEMO ONLY
-</div>
+          <!-- Card Body -->
+          <div class="card-body">
+            <div class="card-body-left">
+              <div class="card-photo-box">
+                <img id="cardPhoto" src="" alt="Student Photo" style="display:none;"/>
+                <div id="cardPhotoPlaceholder" class="card-photo-placeholder">
+                  <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#aaa" stroke-width="1"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                </div>
+              </div>
+              <div class="card-role-badge">STUDENT</div>
+            </div>
 
-<div class="header">
-<h2>STUDENT DEMO CARD</h2>
-<p>NOT VALID FOR IDENTIFICATION</p>
-</div>
+            <div class="card-body-right">
+              <div class="card-dept-title" id="cardDept">DEPARTMENT OF COMPUTER SCIENCE &amp; ENGINEERING (CSE)</div>
 
-<div class="body">
+              <table class="card-info-table">
+                <tr><td class="info-key">Name</td><td class="info-sep">:</td><td class="info-val" id="cName">Rayhan Hussain</td></tr>
+                <tr><td class="info-key">Student ID</td><td class="info-sep">:</td><td class="info-val" id="cId">CSE-25-0187</td></tr>
+                <tr><td class="info-key">Session</td><td class="info-sep">:</td><td class="info-val" id="cSession">2020-21</td></tr>
+                <tr><td class="info-key">Department</td><td class="info-sep">:</td><td class="info-val" id="cDept">Computer Science &amp; Engineering (CSE)</td></tr>
+                <tr><td class="info-key">Faculty</td><td class="info-sep">:</td><td class="info-val" id="cFaculty">Faculty of Science</td></tr>
+                <tr><td class="info-key">Blood Group</td><td class="info-sep">:</td><td class="info-val" id="cBlood">B+</td></tr>
+                <tr><td class="info-key">Date of Birth</td><td class="info-sep">:</td><td class="info-val" id="cDob">30/09/2002</td></tr>
+                <tr><td class="info-key">Valid Until</td><td class="info-sep">:</td><td class="info-val" id="cValid">June 2030</td></tr>
+              </table>
 
-<img id="previewPhoto" class="photo">
+              <!-- Seal -->
+              <div class="card-seal">
+                <svg viewBox="0 0 80 80" width="78" height="78" opacity="0.18">
+                  <circle cx="40" cy="40" r="37" fill="none" stroke="#1a3a6b" stroke-width="2"/>
+                  <circle cx="40" cy="40" r="30" fill="none" stroke="#1a3a6b" stroke-width="1"/>
+                  <text x="40" y="32" text-anchor="middle" fill="#1a3a6b" font-size="7" font-weight="bold">ঢাকা</text>
+                  <text x="40" y="42" text-anchor="middle" fill="#1a3a6b" font-size="7" font-weight="bold">বিশ্ববিদ্যালয়</text>
+                  <text x="40" y="52" text-anchor="middle" fill="#1a3a6b" font-size="6">University</text>
+                  <path d="M15 55 Q40 65 65 55" fill="none" stroke="#1a3a6b" stroke-width="1"/>
+                </svg>
+              </div>
 
-<div class="info">
-<p><b>Name:</b> <span id="cName"></span></p>
-<p><b>ID:</b> <span id="cId"></span></p>
-<p><b>Department:</b> <span id="cDept"></span></p>
-<p><b>Session:</b> <span id="cSession"></span></p>
-<p><b>Blood:</b> <span id="cBlood"></span></p>
-<p><b>DOB:</b> <span id="cDob"></span></p>
-</div>
+              <!-- Signature -->
+              <div class="card-signature">
+                <div class="signature-line">
+                  <svg viewBox="0 0 160 40" width="160" height="40">
+                    <path d="M10,30 C30,5 50,35 70,20 C85,10 95,28 110,22 C125,16 140,25 155,18" fill="none" stroke="#1a3a6b" stroke-width="1.5" stroke-linecap="round"/>
+                    <text x="75" y="38" text-anchor="middle" fill="#1a3a6b" font-size="9" font-style="italic">ASM Maksud CR</text>
+                  </svg>
+                </div>
+                <div class="signature-info">
+                  <strong>Chairman</strong>
+                  <span>Department of CSE</span>
+                  <span>University of Dhaka</span>
+                </div>
+              </div>
+            </div>
+          </div>
 
-</div>
+          <!-- Barcode -->
+          <div class="card-barcode-area">
+            <svg id="barcode"></svg>
+            <div class="barcode-label" id="barcodeLabel">CSE-25-0187</div>
+          </div>
 
-</div>
+          <!-- Card Footer -->
+          <div class="card-footer">
+            <span>THIS CARD IS THE PROPERTY OF THE UNIVERSITY OF DHAKA</span>
+            <span class="footer-sep">|</span>
+            <span>NOT TRANSFERABLE</span>
+            <span class="footer-sep">|</span>
+            <span>IF FOUND, PLEASE RETURN TO CSE OFFICE</span>
+          </div>
 
-</div>
+        </div>
+      </div>
+    </section>
+  </main>
 
-<script src="script.js"></script>
+  <!-- Notice -->
+  <div class="notice-bar">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1a3a6b" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+    This ID card is for demonstration purpose only. Not an official document.
+  </div>
 
+  <!-- Footer -->
+  <footer class="site-footer">
+    &copy; 2024 DU CSE ID Card Generator. All rights reserved.
+  </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>
